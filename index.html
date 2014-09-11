@@ -8,41 +8,61 @@
     <script src="bower_components/jquery.shapeshift/core/jquery.shapeshift.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
 
+    <link rel="stylesheet" href="bower_components/metro-ui-css/css/metro-bootstrap.css"/>
     <link rel="stylesheet" href="stylesheets/screen.css"/>
-    <style>
-        .container > div[data-ss-colspan='1'] { height:80px; width: 80px; }
-        .container > div[data-ss-colspan='2'] { height:170px; width: 170px; }
-        .container > div[data-ss-colspan='3'] { height:240px; width: 240px; }
-    </style>
 </head>
 
-<body>
-    <button id="initButton">Initialize!</button>
-    <div id="gridContainer" class="container">
-        <div class="item" data-ss-colspan="2">
+<body class="metro">
+    <div id="outer-wrapper">
+        <button id="clear-cookie">Clear Cookie</button>
+        <button id="create-cookie">Create Cookie</button>
+        <button id="load-content">Load Default Content</button>
+        <div id="gridContainer" class="container">
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="1">
+            </div>
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="1">
+            </div>
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="2">
+            </div>
+            <div class="item" data-ss-colspan="1">
+            </div>
         </div>
-        <div class="item" data-ss-colspan="1">
-        </div>
-        <div class="item" data-ss-colspan="2">
-        </div>
-        <div class="item" data-ss-colspan="2">
-        </div>
-        <div class="item" data-ss-colspan="2">
-        </div>
-        <div class="item" data-ss-colspan="1">
-        </div>
-        <div class="item" data-ss-colspan="2">
-        </div>
-        <div class="item" data-ss-colspan="2">
-        </div>
-        <div class="item" data-ss-colspan="1">
+        <p>Container below for "disposing" items. Useful for testing if content is being loaded from cookie.</p>
+        <div id="disposal" class="container">
+            <div class="item">
+                <div class="tile bg-orange" id="tile80"></div>
+            </div>
+            <div class="item">
+                <div class="tile bg-red" id="tile70"></div>
+            </div>
         </div>
     </div>
-    <p>Container below for "disposing" items. Useful for testing if content is being loaded from cookie.</p>
-    <div id="disposal" class="container">
-        <div class="item" data-ss-colspan="2">
+
+    <div id="def-content">
+        <div class="item">
+            <div class="tile bg-steel" id="tile0"></div>
         </div>
-        <div class="item" data-ss-colspan="2">
+        <div class="item">
+            <div class="tile bg-lightBlue" id="tile1"></div>
+        </div>
+        <div class="item">
+            <div class="tile bg-olive" id="tile2"></div>
+        </div>
+        <div class="item">
+            <div class="tile bg-taupe" id="tile3"></div>
+        </div>
+        <div class="item">
+            <div class="tile bg-darkBlue" id="tile4"></div>
         </div>
     </div>
 
@@ -70,6 +90,14 @@
 
         }
 
+        function initShapeshift(container){
+           $(container).shapeshift({
+                align:"left",
+                animateOnInit: true,
+                minColumns: 3
+            });
+        }
+
         if(cookie != undefined){
            $(main_container).empty();
             var settings = JSON.parse($.cookie('gridSettings'));
@@ -84,25 +112,31 @@
 
         }
 
-        $('#gridContainer').shapeshift({
-            align:"left",
-            animateOnInit: true,
-            minColumns: 3
-        });
-        
-        $('.container').shapeshift({
-            align:"left",
-            animateOnInit: true,
-            minColumns: 3
-        });
-
-
+        initShapeshift(main_container);
+        initShapeshift('.container');
 
         $('.container').on('ss-drop-complete', function(e,selected){
             //create cookie
             createGridCookie(main_container,set_cookie);
         });
         
+        $('#clear-cookie').click(function() {
+            $.remove('gridSettings');
+        });
+
+        $('#create-cookie').click(function() {
+
+        });
+        $('#load-content').click(function() {
+
+            console.log('Reinitializing');
+            $(main_container).trigger('ss-destroy');
+
+            $(main_container).html($('#def-content').html());
+
+            initShapeshift(main_container);
+        });
+
     </script>
 </body>
 </html>

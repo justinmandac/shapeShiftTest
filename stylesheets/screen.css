@@ -1,22 +1,35 @@
 /* line 1, ../sass/screen.scss */
+#outer-wrapper {
+  margin: 30px;
+  width: 960px;
+}
+
+/* line 6, ../sass/screen.scss */
 .container {
   border: 1px dashed #ccc;
   position: relative;
-  width: 90%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
-/* line 6, ../sass/screen.scss */
+/* line 13, ../sass/screen.scss */
 .container .item {
   background: #ccc;
   position: absolute;
   height: 140px;
   width: 140px;
 }
-/* line 13, ../sass/screen.scss */
-.container .ss-placeholder-child {
-  background: transparent;
-  border: 1px dashed red;
-}
-/* line 17, ../sass/screen.scss */
+/* line 20, ../sass/screen.scss */
 .container .ss-dragged-child {
   opacity: 0.7;
+}
+
+/* line 25, ../sass/screen.scss */
+button {
+  margin: 30px;
+}
+
+/* line 29, ../sass/screen.scss */
+#def-content {
+  display: none;
 }

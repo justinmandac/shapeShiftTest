@@ -89,7 +89,6 @@
             $.cookie(cookiename,JSON.stringify(arr));
 
         }
-
         function initShapeshift(container){
            $(container).shapeshift({
                 align:"left",
@@ -114,18 +113,15 @@
 
         initShapeshift(main_container);
         initShapeshift('.container');
-
         $('.container').on('ss-drop-complete', function(e,selected){
             //create cookie
             createGridCookie(main_container,set_cookie);
-        });
-        
+        });      
         $('#clear-cookie').click(function() {
             $.remove('gridSettings');
         });
-
         $('#create-cookie').click(function() {
-
+             createGridCookie(main_container,set_cookie);
         });
         $('#load-content').click(function() {
 

@@ -6,6 +6,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/jquery.shapeshift/core/jquery.shapeshift.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <style>
         .container{
             border: 1px dashed #ccc;
@@ -15,11 +16,9 @@
         
         .container > div {
             background: #ccc;
-            height: 80px;
             position: absolute;
-            width: 80px;
         }
-        
+        .container > div[data-ss-colspan='1'] { height:80px; width: 80px; }
         .container > div[data-ss-colspan='2'] { height:170px; width: 170px; }
         .container > div[data-ss-colspan='3'] { height:240px; width: 240px; }
         
@@ -30,14 +29,24 @@
         .container .ss-dragged-child{
             opacity: 0.7;        
         }
+
+        .item{
+            height:140px;
+            width : 140px;
+        }
+        .item.small {
+            height: 100px;
+            width : 100px;
+        }
     </style>
 </head>
 
 <body>
+    <button id="initButton">Initialize!</button>
     <div id="gridContainer" class="container">
         <div class="item" data-ss-colspan="2">
         </div>
-        <div class="item" data-ss-colspan="2">
+        <div class="item" data-ss-colspan="1">
         </div>
         <div class="item" data-ss-colspan="2">
         </div>
@@ -45,28 +54,78 @@
         </div>
         <div class="item" data-ss-colspan="2">
         </div>
-        <div class="item" data-ss-colspan="2">
+        <div class="item" data-ss-colspan="1">
         </div>
         <div class="item" data-ss-colspan="2">
         </div>
         <div class="item" data-ss-colspan="2">
         </div>
-        <div class="item" data-ss-colspan="2">
+        <div class="item" data-ss-colspan="1">
         </div>
-
     </div>
+
+    <div id="disposal" class="container">
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+    </div>
+
     <script>
+
+        var set_cookie  = 'gridSettings';
+        var cookie = $.cookie(set_cookie);
+        var main_container = '#gridContainer';
+
+        function createGridCookie(container, cookiename){
+            var children  = $(container).children();
+            var arr = [];
+
+            for(var i = 0 ; i < children.length; i++){
+                var data = {
+                    left: $(children[i]).css('left'),
+                    top: $(children[i]).css('top')
+                };
+
+                arr.push(data);
+            }
+
+            console.log('Cookie Generated:'+JSON.stringify(arr));
+            $.cookie(cookiename,JSON.stringify(arr));
+
+        }
+
+        if(cookie != undefined){
+           $(main_container).empty();
+            var settings = JSON.parse($.cookie('gridSettings'));
+            var temp = '<div class="item" style="top: {top}; left:{left}"></div>';
+
+            for(var i = 0; i < settings.length; i++){
+                var item = temp.replace(/\{top\}/g,settings[i].top).replace(/\{left\}/g,settings[i].left);
+
+                $(main_container).append(item);
+                console.log(item);
+            }
+
+        }
+
         $('#gridContainer').shapeshift({
             align:"left",
             animateOnInit: true,
             minColumns: 3
         });
         
+        $('.container').shapeshift({
+            align:"left",
+            animateOnInit: true,
+            minColumns: 3
+        });
+
+
+
         $('.container').on('ss-drop-complete', function(e,selected){
-            console.log('Done');
-            
-            
-            
+            //create cookie
+            createGridCookie(main_container,set_cookie);
         });
         
     </script>

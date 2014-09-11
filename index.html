@@ -7,37 +7,14 @@
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/jquery.shapeshift/core/jquery.shapeshift.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="stylesheets/screen.css"/>
     <style>
-        .container{
-            border: 1px dashed #ccc;
-            position: relative;
-            width: 90%;
-        }
-        
-        .container > div {
-            background: #ccc;
-            position: absolute;
-        }
         .container > div[data-ss-colspan='1'] { height:80px; width: 80px; }
         .container > div[data-ss-colspan='2'] { height:170px; width: 170px; }
         .container > div[data-ss-colspan='3'] { height:240px; width: 240px; }
-        
-        .container .ss-placeholder-child{
-            background: transparent;
-            border: 1px dashed red;
-        }
-        .container .ss-dragged-child{
-            opacity: 0.7;        
-        }
 
-        .item{
-            height:140px;
-            width : 140px;
-        }
-        .item.small {
-            height: 100px;
-            width : 100px;
-        }
+
     </style>
 </head>
 

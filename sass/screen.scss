@@ -1,6 +1,20 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+.container{
+    border: 1px dashed #ccc;
+    position: relative;
+    width: 90%;
 
-@import "compass/reset";
+    .item{
+        background: #ccc;
+        position: absolute;
+        height:140px;
+        width : 140px
+    }
+
+    .ss-placeholder-child{
+        background: transparent;
+        border: 1px dashed red;
+    }
+    .ss-dragged-child{
+        opacity: 0.7;
+    }
+}

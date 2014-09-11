@@ -1,0 +1,11 @@
+{
+    "name": "WAP Shapeshift",
+    "version" : "0.0.1",
+    "dependencies" : {
+        "jquery" : "latest",
+        "jquery-ui": "1.11.0",
+        "jquery.cookie" : "latest",
+        "jquery.shapeshift" : "latest"        
+    },
+    "private":  true
+}

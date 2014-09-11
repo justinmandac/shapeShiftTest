@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shapeshift Test V2</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/jquery.shapeshift/core/jquery.shapeshift.js"></script>
+    <style>
+        .container{
+            border: 1px dashed #ccc;
+            position: relative;
+            width: 90%;
+        }
+        
+        .container > div {
+            background: #ccc;
+            height: 80px;
+            position: absolute;
+            width: 80px;
+        }
+        
+        .container > div[data-ss-colspan='2'] { height:170px; width: 170px; }
+        .container > div[data-ss-colspan='3'] { height:240px; width: 240px; }
+        
+        .container .ss-placeholder-child{
+            background: transparent;
+            border: 1px dashed red;
+        }
+        .container .ss-dragged-child{
+            opacity: 0.7;        
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gridContainer" class="container">
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+        <div class="item" data-ss-colspan="2">
+        </div>
+
+    </div>
+    <script>
+        $('#gridContainer').shapeshift({
+            align:"left",
+            animateOnInit: true,
+            minColumns: 3
+        });
+        
+        $('.container').on('ss-drop-complete', function(e,selected){
+            console.log('Done');
+            
+            
+            
+        });
+        
+    </script>
+</body>
+</html>

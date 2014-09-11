@@ -1,3 +1,6 @@
+#Progress
+*Tile location and container content is saved.
+*Tile disposal
 
 # To-Do
 * Attach identifiers to items

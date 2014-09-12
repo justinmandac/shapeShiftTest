@@ -57,12 +57,18 @@ $(function () {
     }
 
     initShapeshift(main_container);
-    //initShapeshift('#disposal');
     $('#disposal').shapeshift({
             align:"left",
             animateOnInit: true,
             minColumns: 3,
             enableTrash: true
+    });
+    $('#gallery').shapeshift({
+            align:"left",
+            animateOnInit: true,
+            minColumns: 3,
+            dragClone: true,
+            deleteClone: false
     });
     $('.container').on('ss-drop-complete', function(e,selected){
         //create cookie

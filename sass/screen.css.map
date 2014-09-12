@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "file": "",
+  "sources": ["screen.scss"],
+  "names": [],
+  "mappings": "AAAA;EACI,QAAO;EACP,OAAO;;AAGX;EACI,QAAQ;EACR,UAAU;EACV,OAAO;EACP,aAAY;EACZ,cAAc;EAAlB,WAAW;IAGH,YAAY;IACZ,UAAU;IACV,QAAO;IACP,OAAQ;EAChB,WAAW;IAGH,SAAS;;AAIjB;EACI,QAAQ;;AAGZ;EACI,SAAQ;;AAGZ;EACI,YAAY"
+}

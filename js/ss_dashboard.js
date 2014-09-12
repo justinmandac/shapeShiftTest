@@ -57,7 +57,13 @@ $(function () {
     }
 
     initShapeshift(main_container);
-    initShapeshift('#disposal');
+    //initShapeshift('#disposal');
+    $('#disposal').shapeshift({
+            align:"left",
+            animateOnInit: true,
+            minColumns: 3,
+            enableTrash: true
+    });
     $('.container').on('ss-drop-complete', function(e,selected){
         //create cookie
         createGridCookie(main_container,set_cookie);

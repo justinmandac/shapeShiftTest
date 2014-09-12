@@ -57,7 +57,7 @@ $(function () {
     }
 
     initShapeshift(main_container);
-    $('#disposal').shapeshift({
+    $(disp_container).shapeshift({
             align:"left",
             animateOnInit: true,
             minColumns: 3,
@@ -74,6 +74,10 @@ $(function () {
         //create cookie
         createGridCookie(main_container,set_cookie);
 
+    });
+    $(disp_container).on('ss-trashed', function(e,selected){
+        //create cookie
+        createGridCookie(main_container,set_cookie);
     });
     $('#clear-cookie').click(function() {
         $.remove('gridSettings');

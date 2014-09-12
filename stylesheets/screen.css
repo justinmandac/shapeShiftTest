@@ -33,3 +33,8 @@ button {
 #def-content {
   display: none;
 }
+
+/* line 33, ../sass/screen.scss */
+#dummy {
+  visibility: hidden;
+}

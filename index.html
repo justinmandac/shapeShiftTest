@@ -16,123 +16,38 @@
     <div id="outer-wrapper">
         <button id="clear-cookie">Clear Cookie</button>
         <button id="create-cookie">Create Cookie</button>
+        <button id="show-cookie">Show Cookie Contents</button>
         <button id="load-content">Load Default Content</button>
         <div id="gridContainer" class="container">
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="1">
-            </div>
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="1">
-            </div>
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="2">
-            </div>
-            <div class="item" data-ss-colspan="1">
-            </div>
         </div>
         <p>Container below for "disposing" items. Useful for testing if content is being loaded from cookie.</p>
         <div id="disposal" class="container">
-            <div class="item">
-                <div class="tile bg-orange" id="tile80"></div>
+            <div class="item" id="vm00">
+                <div class="tile bg-orange"></div>
             </div>
-            <div class="item">
-                <div class="tile bg-red" id="tile70"></div>
+            <div class="item" id="cr01">
+                <div class="tile bg-red"></div>
             </div>
         </div>
     </div>
 
     <div id="def-content">
-        <div class="item">
-            <div class="tile bg-steel" id="tile0"></div>
+        <div class="item" id="vm01">
+            <div class="tile bg-steel"></div>
         </div>
-        <div class="item">
-            <div class="tile bg-lightBlue" id="tile1"></div>
+        <div class="item" id="vm02">
+            <div class="tile bg-lightBlue" ></div>
         </div>
-        <div class="item">
-            <div class="tile bg-olive" id="tile2"></div>
+        <div class="item" id="cr00">
+            <div class="tile bg-olive" ></div>
         </div>
-        <div class="item">
-            <div class="tile bg-taupe" id="tile3"></div>
+        <div class="item" id="ts00">
+            <div class="tile bg-taupe"  ></div>
         </div>
-        <div class="item">
-            <div class="tile bg-darkBlue" id="tile4"></div>
+        <div class="item" id="ts02">
+            <div class="tile bg-darkBlue"  ></div>
         </div>
     </div>
-
-    <script>
-
-        var set_cookie  = 'gridSettings';
-        var cookie = $.cookie(set_cookie);
-        var main_container = '#gridContainer';
-
-        function createGridCookie(container, cookiename){
-            var children  = $(container).children();
-            var arr = [];
-
-            for(var i = 0 ; i < children.length; i++){
-                var data = {
-                    left: $(children[i]).css('left'),
-                    top: $(children[i]).css('top')
-                };
-
-                arr.push(data);
-            }
-
-            console.log('Cookie Generated:'+JSON.stringify(arr));
-            $.cookie(cookiename,JSON.stringify(arr));
-
-        }
-        function initShapeshift(container){
-           $(container).shapeshift({
-                align:"left",
-                animateOnInit: true,
-                minColumns: 3
-            });
-        }
-
-        if(cookie != undefined){
-           $(main_container).empty();
-            var settings = JSON.parse($.cookie('gridSettings'));
-            var temp = '<div class="item" style="top: {top}; left:{left}"></div>';
-
-            for(var i = 0; i < settings.length; i++){
-                var item = temp.replace(/\{top\}/g,settings[i].top).replace(/\{left\}/g,settings[i].left);
-
-                $(main_container).append(item);
-                console.log(item);
-            }
-
-        }
-
-        initShapeshift(main_container);
-        initShapeshift('.container');
-        $('.container').on('ss-drop-complete', function(e,selected){
-            //create cookie
-            createGridCookie(main_container,set_cookie);
-        });      
-        $('#clear-cookie').click(function() {
-            $.remove('gridSettings');
-        });
-        $('#create-cookie').click(function() {
-             createGridCookie(main_container,set_cookie);
-        });
-        $('#load-content').click(function() {
-
-            console.log('Reinitializing');
-            $(main_container).trigger('ss-destroy');
-
-            $(main_container).html($('#def-content').html());
-
-            initShapeshift(main_container);
-        });
-
-    </script>
+    <script src="js/ss_dashboard.js"></script>
 </body>
 </html>

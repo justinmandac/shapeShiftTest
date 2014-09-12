@@ -5,21 +5,28 @@ $(function () {
     var disp_container = '#disposal'; //id of container that will serve as the disposal bin
     var add_container  = '#gallery'; //id of container that holds items that can be added to main_container
 
-    function createGridCookie(container, cookiename){
+    //utilities
+    function getGridSettings(container) {
         var children  = $(container).children();
         var arr       = [];
 
-        for(var i = 0 ; i < children.length; i++) {
+        $.each(children, function(i,val){
             var data = {
-                left: $(children[i]).css('left'),
-                top: $(children[i]).css('top'),
-                id: $(children[i]).attr('id')
-            };z
+                left: $(val).css('left'),
+                top: $(val).css('top'),
+                id: $(val).attr('id')
+            };
             arr.push(data);
-        }
 
-        console.log('Cookie Generated:'+JSON.stringify(arr));
-        $.cookie(cookiename,JSON.stringify(arr));
+        });
+
+        return JSON.stringify(arr);
+    }
+
+    function createGridCookie(container, cookiename){
+        var settings = getGridSettings(container);
+        $.cookie(cookiename, settings);
+        console.log('Cookie created:'+settings);
 
     }
 
@@ -31,26 +38,22 @@ $(function () {
         });
     }
 
+    function containerBuilder(container, settings){
+        var temp     = '<div class="item" style="top: {top}; left:{left}" id="{id}"></div>';
+
+        //empty container
+        $(container).empty();
+        $.each(settings, function(i, val) {
+            var item = temp.replace(/\{top\}/g,val.top).replace(/\{left\}/g,val.left).replace(/\{id\}/g,val.id);
+            $(container).append(item);
+        });
+
+    }
     //reconstructs HTML from cookie information
     if(cookie != undefined){
         var settings = JSON.parse($.cookie('gridSettings'));
-        var temp     = '<div class="item" style="top: {top}; left:{left}" id="{id}">';
-        var trail    = '</div>';
-
-        $(main_container).empty();
-
-        //load containers first
-
-        for(var i = 0; i < settings.length; i++) {
-            var id   = settings[i].id;
-            var item = temp.replace(/\{top\}/g,settings[i].top).replace(/\{left\}/g,settings[i].left).replace(/\{id\}/g,id);
-
-            $(main_container).append(item);
-            console.log(item+trail);
-        }
-
+        containerBuilder(main_container,settings); //load containers first
         //add function for loading content based on ids
-
     }
 
     initShapeshift(main_container);

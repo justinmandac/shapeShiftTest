@@ -10,7 +10,7 @@ $(function () {
         var children  = $(container).children();
         var arr       = [];
 
-        $.each(children, function(i,val){
+        $.each(children, function (i, val) {
             var data = {
                 left: $(val).css('left'),
                 top: $(val).css('top'),
@@ -23,78 +23,72 @@ $(function () {
         return JSON.stringify(arr);
     }
 
-    function createGridCookie(container, cookiename){
+    function createGridCookie(container, cookiename) {
         var settings = getGridSettings(container);
         $.cookie(cookiename, settings);
-        console.log('Cookie created:'+settings);
-
     }
 
-    function initShapeshift(container){
-       $(container).shapeshift({
-            align:"left",
+    function initShapeshift(container) {
+        $(container).shapeshift({
+            align: 'left',
             animateOnInit: true,
             minColumns: 3
         });
     }
 
-    function containerBuilder(container, settings){
+    function containerBuilder(container, settings) {
         var temp     = '<div class="item" style="top: {top}; left:{left}" id="{id}"></div>';
 
         //empty container
         $(container).empty();
-        $.each(settings, function(i, val) {
-            var item = temp.replace(/\{top\}/g,val.top).replace(/\{left\}/g,val.left).replace(/\{id\}/g,val.id);
+        $.each(settings, function (i, val) {
+            var item = temp.replace(/\{top\}/g, val.top).replace(/\{left\}/g, val.left).replace(/\{id\}/g, val.id);
             $(container).append(item);
         });
 
     }
     //reconstructs HTML from cookie information
-    if(cookie != undefined){
+    if (cookie !== undefined) {
         var settings = JSON.parse($.cookie('gridSettings'));
-        containerBuilder(main_container,settings); //load containers first
+        containerBuilder(main_container, settings); //load containers first
         //add function for loading content based on ids
     }
 
     initShapeshift(main_container);
     $(disp_container).shapeshift({
-            align:"left",
-            animateOnInit: true,
-            minColumns: 3,
-            enableTrash: true
+        align: 'left',
+        animateOnInit: true,
+        minColumns: 3,
+        enableTrash: true
     });
     $('#gallery').shapeshift({
-            align:"left",
-            animateOnInit: true,
-            minColumns: 3,
-            dragClone: true,
-            deleteClone: false
+        align: 'left',
+        animateOnInit: true,
+        minColumns: 3,
+        dragClone: true,
+        deleteClone: false
     });
-    $('.container').on('ss-drop-complete', function(e,selected){
+    $('.container').on('ss-drop-complete', function (e, selected) {
         //create cookie
-        createGridCookie(main_container,set_cookie);
+        createGridCookie(main_container, set_cookie);
 
     });
-    $(disp_container).on('ss-trashed', function(e,selected){
+    $(disp_container).on('ss-trashed', function (e, selected) {
         //create cookie
-        createGridCookie(main_container,set_cookie);
+        createGridCookie(main_container, set_cookie);
     });
-    $('#clear-cookie').click(function() {
+    $('#clear-cookie').click(function () {
         $.remove('gridSettings');
     });
-    $('#show-cookie').click(function() {
+    $('#show-cookie').click(function () {
         console.log($.cookie('gridSettings'));
     });
-    $('#create-cookie').click(function() {
-         createGridCookie(main_container,set_cookie);
+    $('#create-cookie').click(function () {
+        createGridCookie(main_container, set_cookie);
     });
-    $('#load-content').click(function() {
-
-        console.log('Reinitializing');
+    $('#load-content').click(function () {
         $(main_container).trigger('ss-destroy');
-
         $(main_container).html($('#def-content').html());
-
         initShapeshift(main_container);
     });
 });

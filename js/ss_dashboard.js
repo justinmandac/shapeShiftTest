@@ -26,11 +26,6 @@ $(function () {
     function createGridCookie(container, cookiename) {
         var settings = getGridSettings(container);
         $.cookie(cookiename, settings);
-<<<<<<< HEAD
-=======
-        console.log('Cookie created:' + settings);
-
->>>>>>> origin/master
     }
 
     function initShapeshift(container) {
@@ -92,11 +87,6 @@ $(function () {
         createGridCookie(main_container, set_cookie);
     });
     $('#load-content').click(function () {
-<<<<<<< HEAD
-=======
-
-        console.log('Reinitializing');
->>>>>>> origin/master
         $(main_container).trigger('ss-destroy');
         $(main_container).html($('#def-content').html());
         initShapeshift(main_container);

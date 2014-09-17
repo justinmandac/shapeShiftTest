@@ -30,11 +30,18 @@ button {
 }
 
 /* line 29, ../sass/screen.scss */
+#disposal {
+  background: #fcc;
+  height: inherit;
+  visibility: hidden;
+}
+
+/* line 34, ../sass/screen.scss */
 #def-content {
   display: none;
 }
 
-/* line 33, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 #dummy {
   visibility: hidden;
 }

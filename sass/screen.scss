@@ -1,23 +1,23 @@
-#outer-wrapper{
+#outer-wrapper {
     margin:30px;
     width: 960px;
 
 }
-.container{
+.container {
     border: 1px dashed #ccc;
     position: relative;
     width: 100%;
     margin-left:auto;
     margin-right: auto;
 
-    .item{
+    .item {
         background: #ccc;
         position: absolute;
         height:140px;
         width : 140px
     }
 
-    .ss-dragged-child{
+    .ss-dragged-child {
         opacity: 0.7;
     }
 }
@@ -26,10 +26,15 @@ button {
     margin: 30px;
 }
 
-#def-content{
+#disposal {
+    background: #fcc;
+    height: inherit;
+    visibility: hidden;
+}
+#def-content {
     display:none;
 }
 
-#dummy{
+#dummy {
     visibility: hidden;
 }
